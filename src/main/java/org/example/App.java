@@ -10,5 +10,6 @@ public class App
     {
         System.out.println( "Hello World!" );
         System.out.println("Firs maven");
+        System.out.println("Second maven");
     }
 }
