@@ -6,10 +6,10 @@ package org.example;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-        System.out.println("HHHHHHHHHHHHHHHHHHh");
-        System.out.println("MMMMMMMMMM");
-    }
+//    public static void main( String[] args )
+//    {
+//        System.out.println( "Hello World!" );
+//        System.out.println("HHHHHHHHHHHHHHHHHHh");
+//        System.out.println("MMMMMMMMMM");
+//    }
 }
