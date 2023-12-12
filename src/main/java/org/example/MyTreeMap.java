@@ -1,55 +1,69 @@
 package org.example;
 
-public class MyTreeMap<K extends Comparable<K>, V extends Comparable<V>> {
-
-    Node<K, V> root = new Node<>(null, null);
+public class MyTreeMap<K extends Comparable<K>, V > {
     K key;
     V value;
+    Node<K, V> root = new Node<>(null, null, null, null);
+
 
     public void put(K key, V value) {
-        if (root.getKey() == null) {
-            this.key = key;
-            this.value = value;
+        if(root.getKey() == null){
             root.setKey(key);
             root.setValue(value);
-            putRecurs(root);
+            return;
         }
+        putRecurs(key, value, root);
     }
 
-    public void putRecurs(Node<K, V> node) {
+    private void putRecurs(K key, V value, Node<K, V> node) {
+
         if (key.compareTo(node.getKey()) == 0) {
-            return;
+            node.setValue(value);
         }
+
         if (key.compareTo(node.getKey()) < 0) {
-            if (node.left != null) {
-                putRecurs(node.left);
+            if(node.left == null){
+                node.left = new Node<>(key, value, null, null);
+                return;
             }
-            node.left = new Node<>(null, null);
-            node.left.setKey(key);
-            node.left.setValue(value);
-            return;
+            putRecurs(key, value, node.left);
         }
-        if(key.compareTo(node.getKey())>0){
-            if(node.write != null){
-                putRecurs(node.write);
+        if (key.compareTo(node.getKey()) > 0) {
+            if(node.write == null){
+               node.write = new Node<>(key, value, null, null);
+               return;
             }
-            node.left = new Node<>(null, null);
-            node.write.setKey(key);
-            node.write.setValue(value);
+            putRecurs(key, value, node.write);
         }
     }
 
+    public void print() {
+        if (root == null) {
+            return;
+        }
+        printRecurs(root);
+    }
 
+    private void printRecurs(Node<K, V> node) {
+        if (node == null) {
+            return;
+        }
+        printRecurs(node.left);
+        System.out.println(node.getKey() + ", " + node.getValue());
+        printRecurs(node.write);
+    }
 
-    class Node<K extends Comparable<K>, V extends Comparable<V>> {
+    class Node<K extends Comparable<K>, V> {
         private Node<K, V> left;
         private Node<K, V> write;
         private K key;
         private V value;
 
-        public Node(Node<K, V> left, Node<K, V> write) {
+        public Node(K key, V value, Node<K, V> left, Node<K, V> write) {
             this.left = left;
             this.write = write;
+            this.key = key;
+            this.value = value;
         }
 
         public K getKey() {
