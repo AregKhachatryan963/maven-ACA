@@ -1,13 +1,14 @@
 package org.example;
 
-public class MyTreeMap<K extends Comparable<K>, V > {
+public class MyTreeMap<K extends Comparable<K>, V> {
     K key;
     V value;
     Node<K, V> root = new Node<>(null, null, null, null);
+    Node<K, V> tempNode = new Node<>(null, null, null, null);
 
 
     public void put(K key, V value) {
-        if(root.getKey() == null){
+        if (root.getKey() == null) {
             root.setKey(key);
             root.setValue(value);
             return;
@@ -22,16 +23,16 @@ public class MyTreeMap<K extends Comparable<K>, V > {
         }
 
         if (key.compareTo(node.getKey()) < 0) {
-            if(node.left == null){
+            if (node.left == null) {
                 node.left = new Node<>(key, value, null, null);
                 return;
             }
             putRecurs(key, value, node.left);
         }
         if (key.compareTo(node.getKey()) > 0) {
-            if(node.write == null){
-               node.write = new Node<>(key, value, null, null);
-               return;
+            if (node.write == null) {
+                node.write = new Node<>(key, value, null, null);
+                return;
             }
             putRecurs(key, value, node.write);
         }
@@ -42,6 +43,7 @@ public class MyTreeMap<K extends Comparable<K>, V > {
             return;
         }
         printRecurs(root);
+        System.out.println();
     }
 
     private void printRecurs(Node<K, V> node) {
@@ -49,9 +51,53 @@ public class MyTreeMap<K extends Comparable<K>, V > {
             return;
         }
         printRecurs(node.left);
-        System.out.println(node.getKey() + ", " + node.getValue());
+        System.out.print(node.getKey() + ", ");
         printRecurs(node.write);
     }
+
+    public void remove(K key) {
+        if (root == null) {
+            return;
+        }
+        remove(key, root);
+    }
+
+    private Node<K, V> remove(K key, Node<K, V> node) {
+        if(node == null){
+            return null;
+        }
+        if (node.left == null && node.write == null) {
+            return null;
+        }
+        if (key.compareTo(node.getKey()) < 0) {
+            node.left = remove(key, node.left);
+        }
+        if (key.compareTo(node.getKey()) > 0) {
+            node.write = remove(key, node.write);
+        }
+        if (key.compareTo(node.getKey()) == 0) {
+            if (node.write != null && node.left == null) {
+                return node.write;
+            }
+            if (node.left != null && node.write == null) {
+                return node.left;
+            } else {
+                tempNode = find(node.write);
+                node.setKey(tempNode.getKey());
+                node.setValue(tempNode.getValue());
+                node.write = remove(key, tempNode);
+            }
+        }
+        return node;
+    }
+
+    private Node<K, V> find(Node<K, V> node) {
+        if(node.left != null){
+            find(node.left);
+        }
+        return node;
+    }
+
 
     class Node<K extends Comparable<K>, V> {
         private Node<K, V> left;
