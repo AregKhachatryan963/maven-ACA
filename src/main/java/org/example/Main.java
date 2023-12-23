@@ -17,19 +17,33 @@ public class Main {
 //        myTreeMap.remove(4);
 //        myTreeMap.print();
 
-        MyArrayList myArrayList = new MyArrayList();
-        myArrayList.add("a");
-        myArrayList.add("b");
-        myArrayList.add("c");
-        myArrayList.add("d");
-        myArrayList.add("e");
-        myArrayList.add("f");
-        myArrayList.add("j");
-        System.out.println(myArrayList.get(4));
-        myArrayList.remove(0);
-        System.out.println(myArrayList.get(4));
-        myArrayList.remove("b");
-        System.out.println(myArrayList.get(4));
+//        MyArrayList myArrayList = new MyArrayList();
+//        myArrayList.add("a");
+//        myArrayList.add("b");
+//        myArrayList.add("c");
+//        myArrayList.add("d");
+//        myArrayList.add("e");
+//        myArrayList.add("f");
+//        myArrayList.add("j");
+//        System.out.println(myArrayList.get(4));
+//        myArrayList.remove(0);
+//        System.out.println(myArrayList.get(4));
+//        myArrayList.remove("b");
+//        System.out.println(myArrayList.get(4));
 
+        MyHashSet<Integer> myHashSet = new MyHashSet<>();
+        myHashSet.add(1);
+        myHashSet.add(11);
+        myHashSet.add(12);
+        myHashSet.add(6);
+
+        System.out.println(myHashSet.contains(2));
+        myHashSet.print();
+//        myHashSet.remove(11);
+        myHashSet.add(2);
+        myHashSet.add(3);
+        myHashSet.add(4);
+        myHashSet.add(5);
+        myHashSet.print();
     }
 }
